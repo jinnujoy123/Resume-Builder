@@ -1,10 +1,21 @@
 import React from 'react'
+import Steps from '../components/Steps'
+import Preview from '../components/Preview'
 
 function UserForm() {
   return (
-    <div>
-      Userform
-    </div>
+    <>
+     <div className="container">
+      <div className="row p-5">
+        <div className="col-6">
+            <Steps/>
+        </div>
+        <div className="col-6">
+            <Preview/>
+        </div>
+      </div>
+     </div>
+    </>
   )
 }
 
