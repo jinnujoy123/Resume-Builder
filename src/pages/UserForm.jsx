@@ -10,7 +10,7 @@ function UserForm() {
         <div className="col-6">
             <Steps/>
         </div>
-        <div className="col-6">
+        <div className="col-6 ">
             <Preview/>
         </div>
       </div>
