@@ -13,4 +13,6 @@
     - Create component folder 
 6. Setup url for components
     - npm install react-router-dom
-    - import BrowserRouter    
+    - import BrowserRouter  
+7.Page design
+  

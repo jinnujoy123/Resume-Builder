@@ -27,7 +27,7 @@ function LandingPage() {
         <h4 className='mt-4'>Jobs</h4>
         <p>Automatically receive new relevant job postings.</p>
         <h4 className='mt-4'>Applications</h4>
-        <p>effortlessly manage and track your job applications in an organized manner.</p>
+        <p>Effortlessly manage and track your job applications in an organized manner.</p>
        </div>
        <div className="col-12 col-md-6">
          <div className="tool-image">

@@ -1,18 +1,31 @@
 import React from 'react'
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-import Link from '@mui/material/Link';
 import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import { Link } from "react-router-dom";
+import { FaFileDownload } from "react-icons/fa";
 
+import { FaHistory } from "react-icons/fa";
+import Edit from './Edit';
 
 function Preview() {
   return (
-    <div style={{marginTop:'100px'}}>
-       <Box component="section">
+    <div >
+      <Stack direction={'row'} sx={{justifyContent:'flex-end'}}>
+        <Stack direction={'row'} sx={{alignItems:'center'}}>
+          <button className="btn fs-3 text-primary" ><FaFileDownload /></button>
+            <div className="">
+              <Edit/>
+            </div>
+              <Link to={'/history'} className="btn fs-3 text-primary"><FaHistory /></Link>
+              <Link to={'/resume'} className="btn text-primary" >BACK</Link>
+        </Stack>
+      </Stack>
+    <Box component="section">
      
-      <Paper elevation={3}  sx={{ p: 2,textAlign:'center'}}>
+      <Paper elevation={3}  sx={{my:5, p:5,textAlign:'center'}}>
         <h2>Name</h2>
         <h5>JobTitle</h5>
         <p><span>Location</span> | <span>Email</span> | <span>Phone</span></p>
