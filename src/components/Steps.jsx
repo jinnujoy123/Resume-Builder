@@ -7,6 +7,8 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import { useRef } from "react";
+import { addResumeAPI } from "../services/allAPI";
+import swal from 'sweetalert';
 
 // global variable
 const steps = [
@@ -18,7 +20,7 @@ const steps = [
   "Review & Submit",
 ];
 
-function Steps({userInput,setUserInput}) {
+function Steps({userInput,setUserInput,setFinish,setResumeId}) {
   const skillSuggestionArray = [
     "NODE JS",
     "EXPRESS",
@@ -83,11 +85,11 @@ const userSkillRef=useRef()
   const addSkill=(inputSkill)=>{
      
      if(inputSkill){
-     const inputSkills=inputSkill.toUpperCase()
-      if(userInput.skills.includes(inputSkills)) {
+    
+      if(userInput.skills.includes(inputSkill)) {
       alert("Given Skill is already existing!!")
      }else{
-      setUserInput({...userInput,skills:[...userInput.skills,inputSkills]})
+      setUserInput({...userInput,skills:[...userInput.skills,inputSkill]})
      }
      }
      return userInput
@@ -291,7 +293,7 @@ const removeSkill=(skill)=>{
                   "Results-driven software developer with 3 years of experience in building dynamic web applications using the MERN (MongoDB, Express.js, React.js, Node.js) stack. Skilled in crafting scalable and efficient solutions, with a strong focus on delivering high-quality products. Collaborative team player with excellent problem-solving skills and a passion for continuous learning."
                 }
                   onChange={(e)=>setUserInput({...userInput,summary:e.target.value})}
-                   value={userInput.summary}
+                  
               />
             </div>
           </div>
@@ -301,6 +303,29 @@ const removeSkill=(skill)=>{
     }
   };
 
+  // add resume
+  const handleAddResume=async()=>{
+    const{name,jobTitle,location}=userInput.personalData
+    if(name && jobTitle && location )
+    {
+      try{
+      const result=await addResumeAPI(userInput)
+      setResumeId(result?.data?.id)
+      console.log(result?.data?.id);
+      
+        swal("Success!", "Resume added successfully", "success");
+        // console.log(result);
+        setFinish(true)
+      }catch(err){
+          console.log(err);
+          swal("Error!", "Resume added Failed", "error");
+          
+      }
+      
+    }else{
+      alert('fill the form')
+    }
+  }
   return (
     <Box sx={{ width: "100%" }}>
       <Stepper activeStep={activeStep}>
@@ -354,9 +379,11 @@ const removeSkill=(skill)=>{
                 Skip
               </Button>
             )}
-            <Button onClick={handleNext}>
-              {activeStep === steps.length - 1 ? "Finish" : "Next"}
-            </Button>
+           
+              {activeStep === steps.length - 1 ?
+               <Button onClick={handleAddResume}>Finish</Button> : 
+               <Button onClick={handleNext}>Next</Button>}
+           
           </Box>
         </React.Fragment>
       )}
